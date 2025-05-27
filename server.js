@@ -9,7 +9,7 @@ app.use(cors({
       origin: '*',
       methods: ['GET', 'POST', 'PUT', 'DELETE'],
       allowedHeaders: ['Content-Type', 'Authorization']
-     }));
+     }));
 app.use(express.json());
 
 // ✅ MongoDB Connection
@@ -97,7 +97,7 @@ const StatusStudentModel = mongoose.model('StudentStatus', StatusStudentSchema);
 // Get all students
 app.get('/students', async (req, res) => {
     try {
-        const students = await StudentModel.find().select('name registerNo fingerId rfidUID');
+        const students = await StudentModel.find().select('name registerNo studentYear fingerId rfidUID');
         res.json(students);
     } catch (err) {
         console.error(err);
@@ -218,5 +218,5 @@ app.post('/outstudents/late', async (req, res) => {
 });
 
 app.listen(process.env.PORT, () => {
-    console.log(`🚀 Server is running on http://localhost:${PORT}`);
+    console.log(`🚀 Server is running on http://localhost:${process.env.PORT}`);
 });
